@@ -14,6 +14,8 @@ Serve local speech recognition through Speaches and faster-whisper with a pinned
 - Two tested Speaches fixes: unload without deadlock, and unload aliases such as `whisper-1` correctly.
 - Integration with a shared GPU owner so speech recognition and heavy voice synthesis can take turns.
 
+How the unload fixes work, and what the handoff to synthesis costs, is chapter 02 of the [garage-inference book](https://github.com/bitdeep/garage-inference/blob/main/02-speech-to-text/README.md).
+
 ## Run
 
 Requires Docker Compose, NVIDIA Container Toolkit and enough free GPU memory for the selected Whisper model.
