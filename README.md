@@ -1,6 +1,18 @@
-# Whisper ASR stack
+# Whisper ASR stack: self-hosted speech-to-text
 
 Serve local speech recognition through Speaches and faster-whisper with a pinned container image and persistent model storage. Use the HTTP endpoint directly or the inference SDK for VAD-enabled requests, confidence filtering and coordination with other GPU workloads.
+
+[![Release](https://img.shields.io/github/v/release/bitdeep/whisper-asr-stack)](https://github.com/bitdeep/whisper-asr-stack/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+**Start here:** [Transcribe audio](#run) · [Integrate the stack](#private-deployments) · [Lifecycle fixes](docs/lifecycle.md) · [Work with me](#work-with-me)
+
+## What this adds
+
+- A Docker Compose service for **automatic speech recognition (ASR)** with an OpenAI-compatible transcription endpoint.
+- Persistent model storage and an explicit boundary for private audio and application configuration.
+- Two tested Speaches fixes: unload without deadlock, and unload aliases such as `whisper-1` correctly.
+- Integration with a shared GPU owner so speech recognition and heavy voice synthesis can take turns.
 
 ## Run
 
@@ -43,3 +55,13 @@ docker run --rm --network none --cpus 2 --memory 2g \
 ```
 
 The upstream Speaches base is pinned by digest in `Dockerfile`; no package installation occurs during the build. This project supplies the isolated deployment recipe and bounded lifecycle patches; see [THIRD_PARTY.md](THIRD_PARTY.md).
+
+## Related projects
+
+Use [the inference SDK](https://github.com/bitdeep/gpu-worker-orchestrator) for VAD requests, confidence filtering and model handoffs. [vLLM](https://github.com/bitdeep/vllm-serving-stack) provides language-model serving; [Chatterbox PT-BR](https://github.com/bitdeep/chatterbox-ptbr-server) provides Brazilian Portuguese voice cloning.
+
+## Work with me
+
+I build speech-to-text services and inference pipelines, including model lifecycle, GPU sharing and application integration. For consulting or engineering opportunities, [contact bitdeep on X](https://x.com/_wrbr).
+
+For reproducible bugs, [open an issue](https://github.com/bitdeep/whisper-asr-stack/issues) with the image version and a synthetic example. Keep transcripts, recordings and credentials from real users out of public issues.
